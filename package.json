@@ -1,0 +1,27 @@
+{
+  "name": "Weather App",
+  "version": "1.0.0",
+  "description": "Weather extension for Chrome",
+  "scripts": {
+    "start": "webpack --watch --progress --config webpack.dev.js",
+    "build": "webpack --watch --progress --config webpack.prod.js"
+  },
+  "author": "",
+  "devDependencies": {
+    "@types/chrome": "^0.0.225",
+    "@types/react": "^18.0.29",
+    "@types/react-dom": "^18.0.11",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.3",
+    "html-webpack-plugin": "^5.5.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "style-loader": "^3.3.2",
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.2",
+    "webpack": "^5.76.3",
+    "webpack-cli": "^5.0.1",
+    "webpack-merge": "^5.8.0"
+  }
+}
