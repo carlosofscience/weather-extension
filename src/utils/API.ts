@@ -8,26 +8,26 @@ export interface WeatherData{
     localtime: string,
   },
   current:{
-    temp_c: Number,
-    temp_f: Number,
-    is_day: Number,
+    temp_c: number,
+    temp_f: number,
+    is_day: number,
     condition: {
       text: string,
       icon: string,
-      code: Number
+      code: number
     },
-    wind_mph: Number,
-    wind_kph: Number,
-    wind_degree: Number,
+    wind_mph: number,
+    wind_kph: number,
+    wind_degree: number,
     wind_dir: string,
-    pressure_mb: Number,
-    pressure_in: Number,
-    precip_mm: Number,
-    precip_in: Number,
-    humidity: Number,
-    cloud: Number,
-    feelslike_c: Number,
-    feelslike_f: Number,
+    pressure_mb: number,
+    pressure_in: number,
+    precip_mm: number,
+    precip_in: number,
+    humidity: number,
+    cloud: number,
+    feelslike_c: number,
+    feelslike_f: number,
   }
 }
 
