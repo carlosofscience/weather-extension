@@ -1,6 +1,7 @@
 import React, { useEffect, useState }from 'react'
 import { fetchWeatherData, WeatherData} from '../../utils/API'
 import { Card, CardContent, Typography, Box, CardActions, Button} from '@mui/material'
+import { LocalStorageOptions } from '../../utils/storage'
 
 type weatherCardState = "loading" | "error" |  "ready"
 
@@ -20,9 +21,10 @@ const WeatherCardContainer: React.FC<{
 }
 
 const WeatherCard: React.FC<{
-  zipcode: string
+  zipcode: string,
+  options: LocalStorageOptions,
   onDelete?: ()=>void
-}> = ({zipcode, onDelete})=>{
+}> = ({zipcode, options, onDelete})=>{
 
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [weatherCardState, setweatherCardState] = useState<weatherCardState>("loading")
@@ -57,10 +59,10 @@ const WeatherCard: React.FC<{
           ${weatherData.location.region}`}
         </Typography>
         <Typography variant='body1'>
-          temp: {Math.round(weatherData.current.temp_f)}
+          temp: {Math.round(options.tempScale === 'metric' ? weatherData.current.temp_c : weatherData.current.temp_f)}
         </Typography>
         <Typography variant='body1'>
-          Feels like: {Math.round(weatherData.current.feelslike_f)}
+          Feels like: {Math.round(options.tempScale === 'metric' ? weatherData.current.feelslike_c : weatherData.current.feelslike_f)}
         </Typography>
       </WeatherCardContainer>
   )

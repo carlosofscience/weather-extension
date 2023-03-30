@@ -50,13 +50,24 @@ function App(){
         setZipcodes(updatedZipcodes)
       })
     }
+
+    const handleTempScaleBottonClick = () =>{
+      const updateOptions: LocalStorageOptions = {
+        ...options,
+        tempScale: options.tempScale === 'metric' ? 'imperial' : 'metric',
+      }
+      setStoredOptions(updateOptions).then(()=>{
+        setOptions(updateOptions)
+      })
+    }
+
     
     if(!options) return null //or use load instead
 
     return (<>
    <Box mx={'8px'} my={'16px'}>
-      <Grid>
-        <Grid>
+      <Grid container justifyContent={'space-around'}>
+        <Grid item>
           <Paper>
             <Box px={'15px'} py={'5px'}>
               <InputBase placeholder='Add a zipcode or city' value={zipcodeInput} onChange={(e)=> setZipcodeInput(e.target.value)}/>
@@ -66,8 +77,17 @@ function App(){
             </Box>
           </Paper>
         </Grid>
+        <Grid item>
+          <Paper>
+            <Box py="3px">
+              <IconButton onClick={handleTempScaleBottonClick}>
+                {options.tempScale === 'metric' ? '\u2103' : '\u2109'}
+              </IconButton>
+            </Box>
+          </Paper>
+        </Grid>
       </Grid>
-      { zipcodes.map( (zipcode, index )=> <WeatherCard zipcode={zipcode} key={index} onDelete={()=>{handleZipcodeDeleteButtonOnClick(index)}}></WeatherCard>) }
+      { zipcodes.map( (zipcode, index )=> <WeatherCard zipcode={zipcode} options={options} key={index} onDelete={()=>{handleZipcodeDeleteButtonOnClick(index)}}></WeatherCard>) }
       <Box height={"16px"}></Box>
    </Box>
   </>)
