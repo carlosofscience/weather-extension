@@ -2,11 +2,12 @@ import { WeatherTempScale } from "./API"
 
 export interface LocalStorage{
   cities?: string[]
-  options?:LocalStorageOptions
+  options?: LocalStorageOptions
 }
 
 export interface LocalStorageOptions {
-  tempScale:WeatherTempScale 
+  tempScale: WeatherTempScale
+  homeCity: string
 }
 
 export type LocalStorageKeys = keyof LocalStorage

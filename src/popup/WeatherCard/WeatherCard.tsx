@@ -30,15 +30,18 @@ const WeatherCard: React.FC<{
   const [weatherCardState, setweatherCardState] = useState<weatherCardState>("loading")
 
   useEffect(()=>{
+    
+    console.log('Fetching data for: ', zipcode);
+    
     fetchWeatherData(zipcode)
-    .then( data =>{
+    .then( data =>{      
       setWeatherData(data)
       setweatherCardState("ready")
     })
     .catch(err =>{
       setweatherCardState("error")
     })
-  }, [{zipcode}])
+  }, [zipcode])
 
   if(weatherCardState == "loading" || weatherCardState == "error"){
     return <WeatherCardContainer onDelete={onDelete}>

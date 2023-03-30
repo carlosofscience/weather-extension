@@ -25,6 +25,8 @@ function App(){
         setZipcodes(cities)
       })
       getStoredOptions().then((options)=>{
+        console.log('got options: ', options);
+        
         setOptions(options)
       })
     }, [])
@@ -87,6 +89,10 @@ function App(){
           </Paper>
         </Grid>
       </Grid>
+      {
+        options.homeCity != '' && <WeatherCard zipcode={options.homeCity} options={options} />
+      }
+      
       { zipcodes.map( (zipcode, index )=> <WeatherCard zipcode={zipcode} options={options} key={index} onDelete={()=>{handleZipcodeDeleteButtonOnClick(index)}}></WeatherCard>) }
       <Box height={"16px"}></Box>
    </Box>
