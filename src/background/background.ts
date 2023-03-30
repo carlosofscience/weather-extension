@@ -1,4 +1,10 @@
+import { setStoredCities, setStoredOptions } from "../utils/storage";
+
 // TODO: background script
 chrome.runtime.onInstalled.addListener(() => {
-  // TODO: on installed function
+  //setting default values
+  setStoredCities([])
+  setStoredOptions({
+    tempScale: 'metric'
+  })
 })

@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import '@fontsource/roboto'
 import './popup.css'
 import WeatherCard from './WeatherCard'
 
-import { Box, InputBase, Grid, IconButton, Paper } from '@mui/material'
+import { Box, InputBase, Grid, IconButton, Paper, getTableSortLabelUtilityClass } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
-import { Cipher } from 'crypto'
+import { setStoredCities, setStoredOptions, getStoredCities, getStoredOptions, LocalStorageOptions } from '../utils/storage'
 
 const rootElem = document.createElement('div')
 rootElem.id = "root"
@@ -15,29 +15,44 @@ const root = ReactDOM.createRoot(rootElem);
  
 function App(){
 
-  const [zipcodes, setZipcodes] = useState<string[]>([
-    '03053',
-    '20171',
-    '10001',
-  ])
-
+  const [zipcodes, setZipcodes] = useState<string[]>([])
   const [zipcodeInput, setZipcodeInput] = useState<string>("")
+  const [options, setOptions] = useState<LocalStorageOptions | null>(null)
+
+    useEffect(()=>{
+      //load data when popup opens
+      getStoredCities().then(cities =>{
+        setZipcodes(cities)
+      })
+      getStoredOptions().then((options)=>{
+        setOptions(options)
+      })
+    }, [])
 
     const handleZipcodeButtonOnClick = ()=>{
 
       if (zipcodeInput === ''){
         return
       }
-      setZipcodes([...zipcodes, zipcodeInput])
-      setZipcodeInput('')
-      console.log(zipcodes);
+      const updatedZipcodes = [...zipcodes, zipcodeInput]
+
+      setStoredCities(updatedZipcodes).then(()=>{
+        console.log("saved cities on local");
+        setZipcodes(updatedZipcodes)
+        setZipcodeInput('')
+      })
     }
     
     const handleZipcodeDeleteButtonOnClick= (index: number)=>{
-      zipcodes.splice(index, 1)
-      setZipcodes([...zipcodes])
+      zipcodes.splice(index, 1)      
+      const updatedZipcodes = [...zipcodes]
+      setStoredCities(updatedZipcodes).then(()=>{
+        setZipcodes(updatedZipcodes)
+      })
     }
     
+    if(!options) return null //or use load instead
+
     return (<>
    <Box mx={'8px'} my={'16px'}>
       <Grid>

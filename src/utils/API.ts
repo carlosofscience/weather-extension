@@ -31,6 +31,9 @@ export interface WeatherData{
   }
 }
 
+export type WeatherTempScale = "metric" | 'imperial'
+
+
 export async function fetchWeatherData(city: string): Promise<WeatherData>{
   const res = await fetch(`https://api.weatherapi.com/v1/current.json?key=${REACT_APP_WEATHER_API_KEY}&q=${city}&aqi=yes`)
   
