@@ -29,7 +29,7 @@ const App: React.FC<{}> = ()=>{
 
   //Listening for messages
   useEffect(()=>{
-    chrome.runtime.onMessage.addListener((msg, dender, sendResponse) =>{
+    chrome.runtime.onMessage.addListener((msg, sender, sendResponse) =>{
       if(msg === Messages.TOGGLE_OVERLAY){
         setIsActive(!isActive)
       }
