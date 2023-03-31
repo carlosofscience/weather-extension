@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import '@fontsource/roboto'
 import './options.css'
 //importing material UI components
-import { Card, CardContent, Typography, TextField, Grid, Box, Button } from '@mui/material'
+import { Card, CardContent, Typography, TextField, Grid, Box, Button, Switch} from '@mui/material'
 
 import { getStoredOptions, setStoredOptions, LocalStorageOptions } from '../utils/storage'
 
@@ -27,6 +27,10 @@ const App: React.FC<{}> = () => {
   const handleHomeCityOnChange = (homeCity) =>{
     setOptions({...options, homeCity})
   }
+
+  const handleAutoOverlayOnChange= (hasAutoOverlay: boolean) =>{
+    setOptions({...options, hasAutoOverlay})
+  }
   const handleSaveButtonOnClick = () =>{
     setFormState('saving')
     setStoredOptions(options).then(()=>{
@@ -37,6 +41,7 @@ const App: React.FC<{}> = () => {
   }
 
   const isFieldDisabled = formState === 'saving'
+
 
   if(!options){
     return null
@@ -53,6 +58,10 @@ const App: React.FC<{}> = () => {
           <Grid item>
             <Typography variant='body1'>Home City name</Typography>
             <TextField fullWidth placeholder='Enter a home city name' value={options.homeCity} onChange={e => handleHomeCityOnChange(e.target.value)} disabled={isFieldDisabled}></TextField>
+          </Grid>
+          <Grid item>
+            <Typography variant='body1'>Auto toggle overlay on webpage load</Typography>
+            <Switch color='primary' checked={options.hasAutoOverlay} onChange={ (e, checked)=> handleAutoOverlayOnChange(checked) } disabled={isFieldDisabled}/>
           </Grid>
           <Grid item>
             <Button onClick={handleSaveButtonOnClick} variant='contained' color='primary' disabled={isFieldDisabled}>{formState === 'ready' ? 'Save' : 'Saving...'}</Button>

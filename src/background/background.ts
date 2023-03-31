@@ -6,6 +6,7 @@ chrome.runtime.onInstalled.addListener(() => {
   setStoredCities([])
   setStoredOptions({
     tempScale: 'metric',
-    homeCity:''
+    homeCity:'',
+    hasAutoOverlay: false
   })
 })

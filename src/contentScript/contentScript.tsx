@@ -14,16 +14,25 @@ const root = ReactDOM.createRoot(rootElem);
 const App: React.FC<{}> = ()=>{
 
   const [options, setOptions] = useState<LocalStorageOptions | null>(null)
+  const [isActive, setIsActive] = useState<boolean>(false);
+
 
   useEffect(()=>{
-    getStoredOptions().then(options => setOptions(options))
+    getStoredOptions().then(options => {
+      setOptions(options)
+      setIsActive(options.hasAutoOverlay)
+    })
   }, [])
 
   if(!options) return null;
-
-  return <Card className='overlayCard'>
-    <WeatherCard zipcode={options.homeCity} tempScale={options.tempScale}/>
-  </Card>
+  
+  return <>
+    {
+      isActive && <Card className='overlayCard'>
+        <WeatherCard zipcode={options.homeCity} tempScale={options.tempScale} onDelete={()=>{setIsActive(false)}}/>
+      </Card>
+    }
+  </>
 }
 
 root.render(
