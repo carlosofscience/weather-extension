@@ -25,7 +25,7 @@ const App: React.FC<{}> = ()=>{
       setOptions(options)
       setIsActive(options.hasAutoOverlay)
     })
-  }, [])
+  }, [isActive])
 
   //Listening for messages
   useEffect(()=>{

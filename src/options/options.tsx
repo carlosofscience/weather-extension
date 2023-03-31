@@ -37,6 +37,8 @@ const App: React.FC<{}> = () => {
     setStoredOptions(options).then(()=>{
       setTimeout(()=>{
         setFormState('ready')
+        console.log('options updated to: ', options);
+        
       }, 1000)
     })
   }
