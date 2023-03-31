@@ -31,6 +31,7 @@ const App: React.FC<{}> = () => {
   const handleAutoOverlayOnChange= (hasAutoOverlay: boolean) =>{
     setOptions({...options, hasAutoOverlay})
   }
+  
   const handleSaveButtonOnClick = () =>{
     setFormState('saving')
     setStoredOptions(options).then(()=>{

@@ -32,8 +32,14 @@ const App: React.FC<{}> = ()=>{
     chrome.runtime.onMessage.addListener((msg, sender, sendResponse) =>{
       if(msg === Messages.TOGGLE_OVERLAY){
         setIsActive(!isActive)
+        sendResponse('overlay has been toggled!')
+      }else if(msg === Messages.UPDATE_TEMPSCALE){
+         getStoredOptions().then(options => {
+          setOptions(options)
+          setIsActive(options.hasAutoOverlay)
+        })
+        sendResponse('overlay has been Updated!')
       }
-      sendResponse('overlay has been toggled!')
     })
   }, [isActive])
 

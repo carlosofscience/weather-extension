@@ -60,6 +60,12 @@ function App(){
       }
       setStoredOptions(updateOptions).then(()=>{
         setOptions(updateOptions)
+        // updating content script (overlay)
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+          var activeTab = tabs[0];
+          console.log("trying to update tempscale overlay for ", activeTab);
+          injectContentScript(activeTab, sendUpdateTempScaleMessage);
+        });
       })
     }
 
@@ -67,9 +73,8 @@ function App(){
       // Get the current active tab and inject content script
       chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         var activeTab = tabs[0];
-        console.log("trying to injecto to: ", activeTab);
-        
-        injectContentScript(activeTab);
+        console.log("trying to toggle overlay for: ", activeTab);
+        injectContentScript(activeTab, sendToggleMessage);
       });
     }
 
@@ -125,7 +130,7 @@ root.render(
 );
 
 // Inject content script and send a message to it
-function injectContentScript(tab) {
+function injectContentScript(tab, callback) {
 
   let CONTENT_SCRIPT_ENABLED: boolean;
   console.log("executeScript to tab.id: ", tab.id);
@@ -158,12 +163,12 @@ function injectContentScript(tab) {
             },
             function () {
               // Send a message to the content script
-              sendToggleMessage(tab.id)
+              callback(tab.id)
             }
           );
         } else {
           // Send a message to the content script
-          sendToggleMessage(tab.id)
+          callback(tab.id)
         }
       }
     }
@@ -180,4 +185,15 @@ function sendToggleMessage(tabId) {
     }
   );
 }
- 
+
+function sendUpdateTempScaleMessage(tabId) {
+  chrome.tabs.sendMessage(
+    tabId,
+    Messages.UPDATE_TEMPSCALE,
+    function (response) {
+      console.log(response);
+    }
+  );
+}
+
+
