@@ -13,7 +13,7 @@
     "default_title": "Weather Extension",
     "default_icon": "icon.png"
   },
-  "permissions": ["storage", "tabs", "scripting"],
+  "permissions": ["storage", "tabs", "scripting", "contextMenus"],
   "host_permissions": ["<all_urls>"],
   "options_page": "options.html",
   "background": {
