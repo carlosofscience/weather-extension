@@ -2,6 +2,7 @@ import React, { useEffect, useState }from 'react'
 import { fetchWeatherData, WeatherData} from '../../utils/API'
 import { Card, CardContent, Typography, Box, CardActions, Button} from '@mui/material'
 import'./WeatherCard.css' 
+import { Messages } from '../../utils/messages'
 
 type weatherCardState = "loading" | "error" |  "ready"
 
@@ -32,15 +33,20 @@ const WeatherCard: React.FC<{
   useEffect(()=>{
     
     console.log('Fetching data for: ', zipcode);
-    
-    fetchWeatherData(zipcode)
-    .then( data =>{      
-      setWeatherData(data)
-      setweatherCardState("ready")
-    })
-    .catch(err =>{
-      setweatherCardState("error")
-    })
+    getDatafromBgScript(zipcode)
+      .then( response => {
+
+        if(response.error){
+          setweatherCardState("error")
+        }else{
+          console.log("card weather data is: ", response);
+          setWeatherData(response)
+          setweatherCardState("ready")
+        }
+      })
+      .catch(error => {
+        setweatherCardState("error")
+      });    
   }, [zipcode])
 
   if(weatherCardState == "loading" || weatherCardState == "error"){
@@ -74,3 +80,16 @@ const WeatherCard: React.FC<{
 }
 
 export default WeatherCard
+
+
+function getDatafromBgScript(city) {
+  return new Promise<any>((resolve, reject) => {
+    chrome.runtime.sendMessage({message: Messages.FETCH_WEATHER_DATA_FROM_BG, city}, response => {
+      if (chrome.runtime.lastError){
+        reject(chrome.runtime.lastError)
+      }else{
+        resolve(response);
+      }
+    });
+  });
+}

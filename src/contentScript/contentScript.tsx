@@ -25,7 +25,7 @@ const App: React.FC<{}> = ()=>{
       setOptions(options)
       setIsActive(options.hasAutoOverlay)
     })
-  }, [isActive])
+  }, [])
 
   //Listening for messages
   useEffect(()=>{
@@ -59,7 +59,3 @@ root.render(
    <App />
   </React.StrictMode>
 );
-
-console.log(typeof App === 'function')
-console.log(window['CONTENT_SCRIPT_ENABLED'])
- console.log('content script running');

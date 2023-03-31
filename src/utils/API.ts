@@ -1,4 +1,4 @@
-const REACT_APP_WEATHER_API_KEY = '0f52057383af4a36b7b182759232503'
+export let REACT_APP_WEATHER_API_KEY:string  = '0f52057383af4a36b7b182759232503'
 
 export interface WeatherData{
   location:{
