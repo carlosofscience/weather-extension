@@ -67,6 +67,10 @@ function App(){
           injectContentScript(activeTab, sendUpdateTempScaleMessage);
         });
       })
+      //update badge
+      chrome.runtime.sendMessage({message: Messages.UPDATE_BADGE}, response => {
+        console.log(response);
+      });
     }
 
     const handleOverlayButtonOnClick = ()=>{

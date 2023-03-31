@@ -4,8 +4,8 @@ import '@fontsource/roboto'
 import './options.css'
 //importing material UI components
 import { Card, CardContent, Typography, TextField, Grid, Box, Button, Switch} from '@mui/material'
-
 import { getStoredOptions, setStoredOptions, LocalStorageOptions } from '../utils/storage'
+import { Messages } from '../utils/messages'
 
 const rootElem = document.createElement('div')
 rootElem.id = "root"
@@ -41,6 +41,10 @@ const App: React.FC<{}> = () => {
         
       }, 1000)
     })
+    //update badge
+    chrome.runtime.sendMessage({message: Messages.UPDATE_BADGE}, response => {
+      console.log(response);
+    });
   }
 
   const isFieldDisabled = formState === 'saving'

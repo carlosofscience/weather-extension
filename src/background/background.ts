@@ -39,6 +39,9 @@ chrome.runtime.onMessage.addListener(function({message, city}, sender, sendRespo
         sendResponse({error: error.message })
       });
     return true; // indicate that sendResponse will be called asynchronously
+  }else if(message === Messages.UPDATE_BADGE){
+    udpateBadge()
+    sendResponse('badge updated')
   }
 });
 
@@ -48,16 +51,17 @@ chrome.contextMenus.onClicked.addListener( e =>{
     setStoredCities([...cities, e.selectionText])
   })
 })
-
 chrome.alarms.onAlarm.addListener(()=>{
+  udpateBadge()
+})
 
+function udpateBadge(){
   getStoredOptions().then(options =>{
     if(options.homeCity === "") return;
-      
     fetchWeatherData(options.homeCity).then(data =>{
       chrome.action.setBadgeText({
         text: options.tempScale === 'metric'? Math.round(data.current.temp_c) + '\u2103' : Math.round(data.current.temp_f) + '\u2109'
       })
     })
   })
-})
+}
