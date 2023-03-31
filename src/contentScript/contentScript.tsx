@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom/client'
-import '@fontsource/roboto'
+// import '@fontsource/roboto'
 import { Card } from '@mui/material'
 import WeatherCard from '../components/WeatherCard'
 import './contentScript.css'
 import { getStoredOptions, LocalStorageOptions } from '../utils/storage'
+import { Messages } from '../utils/messages'
+
+window['CONTENT_SCRIPT_ENABLED'] = true;
 
 const rootElem = document.createElement('div')
 rootElem.id = "root"
@@ -24,6 +27,16 @@ const App: React.FC<{}> = ()=>{
     })
   }, [])
 
+  //Listening for messages
+  useEffect(()=>{
+    chrome.runtime.onMessage.addListener((msg, dender, sendResponse) =>{
+      if(msg === Messages.TOGGLE_OVERLAY){
+        setIsActive(!isActive)
+      }
+      sendResponse('overlay has been toggled!')
+    })
+  }, [isActive])
+
   if(!options) return null;
   
   return <>
@@ -40,3 +53,7 @@ root.render(
    <App />
   </React.StrictMode>
 );
+
+console.log(typeof App === 'function')
+console.log(window['CONTENT_SCRIPT_ENABLED'])
+ console.log('content script running');
