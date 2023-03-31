@@ -7,9 +7,12 @@ import { Card, CardContent, Typography, TextField, Grid, Box, Button } from '@mu
 
 import { getStoredOptions, setStoredOptions, LocalStorageOptions } from '../utils/storage'
 
+type FormState = 'ready' | 'saving'
+
 const App: React.FC<{}> = () => {
 
   const [options, setOptions] = useState<LocalStorageOptions | null>(null)
+  const [formState, setFormState] = useState<FormState>('ready')
 
   useEffect(() => {
     getStoredOptions().then(options => setOptions(options))
@@ -18,6 +21,16 @@ const App: React.FC<{}> = () => {
   const handleHomeCityOnChange = (homeCity) =>{
     setOptions({...options, homeCity})
   }
+  const handleSaveButtonOnClick = () =>{
+    setFormState('saving')
+    setStoredOptions(options).then(()=>{
+      setTimeout(()=>{
+        setFormState('ready')
+      }, 1000)
+    })
+  }
+
+  const isFieldDisabled = formState === 'saving'
 
   if(!options){
     return null
@@ -33,10 +46,10 @@ const App: React.FC<{}> = () => {
           </Grid>
           <Grid item>
             <Typography variant='body1'>Home City name</Typography>
-            <TextField fullWidth placeholder='Enter a home city name' value={options.homeCity} onChange={e => handleHomeCityOnChange(e.target.value)}></TextField>
+            <TextField fullWidth placeholder='Enter a home city name' value={options.homeCity} onChange={e => handleHomeCityOnChange(e.target.value)} disabled={isFieldDisabled}></TextField>
           </Grid>
           <Grid item>
-            <Button variant='contained' color='primary'>Save</Button>
+            <Button onClick={handleSaveButtonOnClick} variant='contained' color='primary' disabled={isFieldDisabled}>{formState === 'ready' ? 'Save' : 'Saving...'}</Button>
           </Grid>
         </Grid>
       </CardContent>
