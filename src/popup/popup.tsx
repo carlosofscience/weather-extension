@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import '@fontsource/roboto'
 import './popup.css'
-import WeatherCard from './WeatherCard'
+import WeatherCard from '../components/WeatherCard'
 
 import { Box, InputBase, Grid, IconButton, Paper, getTableSortLabelUtilityClass } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
@@ -90,10 +90,10 @@ function App(){
         </Grid>
       </Grid>
       {
-        options.homeCity != '' && <WeatherCard zipcode={options.homeCity} options={options} />
+        options.homeCity != '' && <WeatherCard zipcode={options.homeCity} tempScale={options.tempScale} />
       }
       
-      { zipcodes.map( (zipcode, index )=> <WeatherCard zipcode={zipcode} options={options} key={index} onDelete={()=>{handleZipcodeDeleteButtonOnClick(index)}}></WeatherCard>) }
+      { zipcodes.map( (zipcode, index )=> <WeatherCard zipcode={zipcode} tempScale={options.tempScale} key={index} onDelete={()=>{handleZipcodeDeleteButtonOnClick(index)}}></WeatherCard>) }
       <Box height={"16px"}></Box>
    </Box>
   </>)

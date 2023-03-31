@@ -22,9 +22,9 @@ const WeatherCardContainer: React.FC<{
 
 const WeatherCard: React.FC<{
   zipcode: string,
-  options: LocalStorageOptions,
+  tempScale: string,
   onDelete?: ()=>void
-}> = ({zipcode, options, onDelete})=>{
+}> = ({zipcode, tempScale, onDelete})=>{
 
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [weatherCardState, setweatherCardState] = useState<weatherCardState>("loading")
@@ -62,10 +62,10 @@ const WeatherCard: React.FC<{
           ${weatherData.location.region}`}
         </Typography>
         <Typography variant='body1'>
-          temp: {Math.round(options.tempScale === 'metric' ? weatherData.current.temp_c : weatherData.current.temp_f)}
+          temp: {Math.round(tempScale === 'metric' ? weatherData.current.temp_c : weatherData.current.temp_f)}
         </Typography>
         <Typography variant='body1'>
-          Feels like: {Math.round(options.tempScale === 'metric' ? weatherData.current.feelslike_c : weatherData.current.feelslike_f)}
+          Feels like: {Math.round(tempScale === 'metric' ? weatherData.current.feelslike_c : weatherData.current.feelslike_f)}
         </Typography>
       </WeatherCardContainer>
   )

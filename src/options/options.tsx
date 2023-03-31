@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 import '@fontsource/roboto'
 import './options.css'
 //importing material UI components
 import { Card, CardContent, Typography, TextField, Grid, Box, Button } from '@mui/material'
 
 import { getStoredOptions, setStoredOptions, LocalStorageOptions } from '../utils/storage'
+
+const rootElem = document.createElement('div')
+rootElem.id = "root"
+document.body.appendChild(rootElem)
+const root = ReactDOM.createRoot(rootElem);
+
 
 type FormState = 'ready' | 'saving'
 
@@ -58,6 +64,9 @@ const App: React.FC<{}> = () => {
   )
 }
 
-const root = document.createElement('div')
-document.body.appendChild(root)
-ReactDOM.render(<App />, root)
+
+root.render(
+  <React.StrictMode>
+   <App />
+  </React.StrictMode>
+);
