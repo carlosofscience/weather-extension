@@ -12,11 +12,11 @@ const WeatherCardContainer: React.FC<{
   children: React.ReactNode
   onDelete?:()=> void
 }> = ({children, onDelete})=>{
-  return   <Box mx={'4px'} my={'16px'} className='frosted'>
+  return   <Box mx={'4px'} my={'16px'} className='frosted' position={'relative'}>
       <Card>
         <CardContent>{children}</CardContent>
         <CardActions>
-          <Box marginLeft ={'auto'} >
+          <Box position={'absolute'} right={'10px'} bottom={'10px'}>
             { onDelete && <Button color='secondary' onClick={onDelete}> <Typography className='weatherCard-body'>Delete</Typography> </Button> }
           </Box>
         </CardActions>

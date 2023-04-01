@@ -7,29 +7,31 @@ body {
   padding: 0 !important;
   margin: 0 !important;
   width: 360px;
-  height: 520px;
-  max-height: 520px;
+  height: 600px;
+  max-height: 600px;
   box-sizing: border-box;
 }
 
 .popup-container {
   font-family: 'Roboto';
   max-width: 360px;
-  height: 520px;
-  max-height: 520px;
+  height: 600px;
+  max-height: 600px;
   backdrop-filter: blur(5px);
   position: relative;
   background-color: rgba(84, 101, 255, 0.657);
   box-sizing: border-box !important;
   overflow: hidden;
+  display: flex;
+  flex-flow: column;
 }
 
 .popup-container::after{
   content: '';
   background-image: linear-gradient(rgba(5, 243, 251, 0.406), rgba(47, 102, 255, 0.559));
   width: 360px;
-  height: 520px;
-  max-height: 520px;
+  height: 600px;
+  max-height: 600px;
   top: 0;
   left: 0;
   position: absolute;
@@ -38,12 +40,10 @@ body {
 
 .cardsContainer{
   max-width: 360px;
-  max-height: 450px;
-  margin: 16px 0;
-  padding-right: 5px;
+  height: 300px;
+  max-height: 520px;
   overflow: auto;
-  float: left;
-  box-sizing: border-box;
+  padding-right: 5px;
 }
 
 .frosted > div{
@@ -52,7 +52,7 @@ body {
 }
 
 .cardsContainer::-webkit-scrollbar {
-  width: 12px;               /* width of the entire scrollbar */
+  width: 10px;               /* width of the entire scrollbar */
 }
 
 .cardsContainer::-webkit-scrollbar-track {
@@ -62,5 +62,5 @@ body {
 .cardsContainer::-webkit-scrollbar-thumb {
   background-color:  rgba(255, 255, 255, 0.407);    /* color of the scroll thumb */
   border-radius: 20px;       /* roundness of the scroll thumb */
-  border: 3px solid rgba(255, 255, 255, 0.129);
+  border: 2px solid rgba(255, 255, 255, 0.129);
 }
