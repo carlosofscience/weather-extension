@@ -1,39 +1,66 @@
 body {
   background-color: #f5f5f5;
-  width: 360px;
-  height: 512px;
   font-family: 'Roboto';
 }
 
 #root, html, body{
   padding: 0 !important;
   margin: 0 !important;
-  max-width: 360px;
-  max-height: 512px;
+  width: 360px;
+  height: 520px;
+  max-height: 520px;
   box-sizing: border-box;
 }
 
 .popup-container {
   font-family: 'Roboto';
-  width: 360px;
-  height: 512px;
+  max-width: 360px;
+  height: 520px;
+  max-height: 520px;
   backdrop-filter: blur(5px);
   position: relative;
   background-color: rgba(84, 101, 255, 0.657);
+  box-sizing: border-box !important;
+  overflow: hidden;
 }
 
 .popup-container::after{
   content: '';
   background-image: linear-gradient(rgba(5, 243, 251, 0.406), rgba(47, 102, 255, 0.559));
   width: 360px;
-  height: 512px;
+  height: 520px;
+  max-height: 520px;
   top: 0;
   left: 0;
   position: absolute;
   z-index: -1;
 }
 
+.cardsContainer{
+  max-width: 360px;
+  max-height: 450px;
+  margin: 16px 0;
+  padding-right: 5px;
+  overflow: auto;
+  float: left;
+  box-sizing: border-box;
+}
+
 .frosted > div{
   background-color: rgba(255, 255, 255, 0.407);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.cardsContainer::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+
+.cardsContainer::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.407);
+}
+
+.cardsContainer::-webkit-scrollbar-thumb {
+  background-color:  rgba(255, 255, 255, 0.407);    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid rgba(255, 255, 255, 0.129);
 }

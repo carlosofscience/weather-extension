@@ -121,8 +121,10 @@ function App(){
         options.homeCity != '' && <WeatherCard zipcode={options.homeCity} tempScale={options.tempScale} />
       }
       
-      { zipcodes.map( (zipcode, index )=> <WeatherCard zipcode={zipcode} tempScale={options.tempScale} key={index} onDelete={()=>{handleZipcodeDeleteButtonOnClick(index)}}></WeatherCard>) }
-      <Box height={"16px"}></Box>
+      <Box className="cardsContainer">
+        { zipcodes.map( (zipcode, index )=> <WeatherCard zipcode={zipcode} tempScale={options.tempScale} key={index} onDelete={()=>{handleZipcodeDeleteButtonOnClick(index)}}></WeatherCard>) }
+        <Box py={'8px'}></Box>
+      </Box>
    </Box>
   </>)
 }
