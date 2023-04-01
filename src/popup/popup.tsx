@@ -86,9 +86,9 @@ function App(){
     if(!options) return null //or use load instead
 
     return (<>
-   <Box mx={'8px'} my={'16px'}>
+   <Box px={'8px'} py={'16px'} className='popup-container' boxSizing={'border-box'}>
       <Grid container justifyContent={'space-around'}>
-        <Grid item>
+        <Grid item className='frosted'>
           <Paper>
             <Box px={'15px'} py={'5px'}>
               <InputBase placeholder='Add a zipcode or city' value={zipcodeInput} onChange={(e)=> setZipcodeInput(e.target.value)}/>
@@ -98,7 +98,7 @@ function App(){
             </Box>
           </Paper>
         </Grid>
-        <Grid item>
+        <Grid item className='frosted'>
           <Paper>
             <Box py="3px">
               <IconButton onClick={handleTempScaleBottonClick}>
@@ -107,7 +107,7 @@ function App(){
             </Box>
           </Paper>
         </Grid>
-        <Grid item>
+        <Grid item className='frosted'>
           <Paper>
             <Box py="5px">
               <IconButton onClick={handleOverlayButtonOnClick}>

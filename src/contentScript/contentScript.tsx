@@ -48,7 +48,7 @@ const App: React.FC<{}> = ()=>{
   return <>
     {
       isActive && <Card className='overlayCard'>
-        <WeatherCard zipcode={options.homeCity} tempScale={options.tempScale} onDelete={()=>{setIsActive(false)}}/>
+        <WeatherCard zipcode={options.homeCity} tempScale={options.tempScale} onDelete={()=>{setIsActive(false)}} />
       </Card>
     }
   </>

@@ -4,3 +4,36 @@ body {
   height: 512px;
   font-family: 'Roboto';
 }
+
+#root, html, body{
+  padding: 0 !important;
+  margin: 0 !important;
+  max-width: 360px;
+  max-height: 512px;
+  box-sizing: border-box;
+}
+
+.popup-container {
+  font-family: 'Roboto';
+  width: 360px;
+  height: 512px;
+  backdrop-filter: blur(5px);
+  position: relative;
+  background-color: rgba(84, 101, 255, 0.657);
+}
+
+.popup-container::after{
+  content: '';
+  background-image: linear-gradient(rgba(5, 243, 251, 0.406), rgba(47, 102, 255, 0.559));
+  width: 360px;
+  height: 512px;
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.frosted > div{
+  background-color: rgba(255, 255, 255, 0.407);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}

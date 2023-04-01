@@ -11,7 +11,7 @@ const WeatherCardContainer: React.FC<{
   children: React.ReactNode
   onDelete?:()=> void
 }> = ({children, onDelete})=>{
-  return   <Box mx={'4px'} my={'16px'}>
+  return   <Box mx={'4px'} my={'16px'} className='frosted'>
       <Card>
         <CardContent>{children}</CardContent>
         <CardActions>
