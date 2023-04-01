@@ -1,8 +1,9 @@
 import React, { useEffect, useState }from 'react'
-import { fetchWeatherData, WeatherData} from '../../utils/API'
+import { WeatherData} from '../../utils/API'
 import { Card, CardContent, Typography, Box, CardActions, Button} from '@mui/material'
 import'./WeatherCard.css' 
 import { Messages } from '../../utils/messages'
+import {Grid} from '@mui/material'
 
 type weatherCardState = "loading" | "error" |  "ready"
 
@@ -15,7 +16,9 @@ const WeatherCardContainer: React.FC<{
       <Card>
         <CardContent>{children}</CardContent>
         <CardActions>
-          { onDelete && <Button color='secondary' onClick={onDelete}> <Typography className='weatherCard-body'>Delete</Typography> </Button> }
+          <Box marginLeft ={'auto'} >
+            { onDelete && <Button color='secondary' onClick={onDelete}> <Typography className='weatherCard-body'>Delete</Typography> </Button> }
+          </Box>
         </CardActions>
       </Card>
     </Box>
@@ -65,16 +68,23 @@ const WeatherCard: React.FC<{
 
   return (
       <WeatherCardContainer onDelete={onDelete}>
-        <Typography className='weatherCard-title'>
-          {`${weatherData.location.name}, 
-          ${weatherData.location.region}`}
-        </Typography>
-        <Typography className='weatherCard-body'>
-          temp: {Math.round(tempScale === 'metric' ? weatherData.current.temp_c : weatherData.current.temp_f)}
-        </Typography>
-        <Typography className='weatherCard-body'>
-          Feels like: {Math.round(tempScale === 'metric' ? weatherData.current.feelslike_c : weatherData.current.feelslike_f)}
-        </Typography>
+        <Grid container justifyContent={'space-around'}>
+          <Grid item maxWidth={'70%'}>
+            <Typography className='weatherCard-title'>
+              {`${weatherData.location.name}, 
+              ${weatherData.location.region}`}
+            </Typography>
+            <Typography className='weatherCard-temp'>
+              {Math.round(tempScale === 'metric' ? weatherData.current.temp_c : weatherData.current.temp_f)}
+            </Typography>
+            <Typography className='weatherCard-body'>
+              Feels like: {Math.round(tempScale === 'metric' ? weatherData.current.feelslike_c : weatherData.current.feelslike_f)}
+            </Typography>
+          </Grid>
+          <Grid item maxWidth={'30%'} margin={'auto'}>
+            <img src={`https:${weatherData.current.condition.icon}`} alt={weatherData.current.condition.text} />
+          </Grid>
+        </Grid>
       </WeatherCardContainer>
   )
 }
